@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Removed unused Link import
 import { useAuth } from '../context/AuthContext';
 import { Navigation } from '../components/Navigation';
 import { Camera, User, Edit, Trash2, ArrowLeft } from 'lucide-react';

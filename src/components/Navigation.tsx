@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { House, LogOut, Menu, ShoppingCart, SquarePlus, User, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export const Navigation = () => {
   const { currentUser, logout } = useAuth();
   const location = useLocation();
-  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 

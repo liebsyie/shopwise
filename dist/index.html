@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="ShopWise" />
+    <meta property="og:description" content="ShopWise: Master grocery budgeting with live tracking. Create categorized lists and manage spending like never before!" />
+    <meta property="og:image" content="https://mocha-cdn.com/og.png" type="image/png" />
+    <meta property="og:url" content="https://nmetge3yi543k.mocha.app" />
+    <meta property="og:type" content="website" />
+    <meta property="og:author" content="Mocha" />
+    <meta property="og:site_name" content="ShopWise" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:site" content="@buildwithmocha" />
+    <meta property="twitter:title" content="ShopWise" />
+    <meta property="twitter:description" content="ShopWise: Master grocery budgeting with live tracking. Create categorized lists and manage spending like never before!" />
+    <meta property="twitter:image" content="https://mocha-cdn.com/og.png" type="image/png" />
+    <link rel="shortcut icon" href="https://mocha-cdn.com/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://mocha-cdn.com/apple-touch-icon.png" type="image/png" />
+    <title>ShopWise - Smart Budget Shopping</title>
+    <script type="module" crossorigin src="/shopwise/assets/index-C2Q63-Af.js"></script>
+    <link rel="stylesheet" crossorigin href="/shopwise/assets/index-C7CorS04.css">
+    <script type="module">
+          // Report any logs, errors, etc to the parent mocha app context to include in
+          // the bottom panel.
+          for (const method of ['log', 'debug', 'info', 'error', 'warn']) {
+            const originalFn = console[method];
+            console[method] = function(...args) {
+              window.parent.postMessage({ type: 'console', method, args: args.map(a => `${a}`) }, '*');
+              return originalFn(...args);
+            };
+          }
+
+          // Report any thrown errors / promise rejections so they show up in the logs
+          window.addEventListener('error', (e) => {
+            if (window.parent) {
+              window.parent.postMessage({ type: 'error', stack: e.error.stack }, '*');
+            }
+          });
+          window.addEventListener('unhandledrejection', (e) => {
+            if (window.parent) {
+              window.parent.postMessage({ type: 'unhandledrejection', reason: e.reason }, '*');
+            }
+          });
+
+          // Report URL change event from iframe
+          const originalPushState = history.pushState;
+          const originalReplaceState = history.replaceState;
+
+          const notifyParent = () => {
+            window.parent.postMessage({ type: 'iframe_url_changed', url: window.location.href }, '*');
+          };
+
+          history.pushState = function (...args) {
+            originalPushState.apply(this, args);
+            notifyParent();
+          };
+
+          history.replaceState = function (...args) {
+            originalReplaceState.apply(this, args);
+            notifyParent();
+          };
+
+          window.addEventListener('popstate', notifyParent);
+          window.addEventListener('hashchange', notifyParent);
+        </script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

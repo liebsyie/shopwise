@@ -1,9 +1,9 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Navigation } from '../components/Navigation';
 import { useList } from '../context/ListContext';
 import { toast } from 'react-toastify';
-import { ChartPie, ChevronLeft, CircleAlert, DollarSign, Edit, Plus, ShoppingBag, Tag, Trash2 } from 'lucide-react';
+import { ChartPie, ChevronLeft, CircleAlert, Edit, Plus, ShoppingBag, Tag, Trash2 } from 'lucide-react';
 import { GroceryItem } from '../types';
 import AddItemForm from '../components/AddItemForm';
 
@@ -11,7 +11,6 @@ const ListDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { 
-    lists, 
     currentList, 
     setCurrentList, 
     totalSpent, 

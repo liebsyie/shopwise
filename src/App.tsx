@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import NewList from './pages/NewList';
+import EditList from './pages/EditList'; // NEW - import your edit page
 import ListDetail from './pages/ListDetail';
 import Profile from './pages/Profile';
 import './index.css';
@@ -17,21 +18,21 @@ import './index.css';
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
-  
+
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  
+
   return children;
 };
 
 const PublicRoute = ({ children }: { children: JSX.Element }) => {
   const { isAuthenticated } = useAuth();
-  
+
   if (isAuthenticated) {
     return <Navigate to="/dashboard" replace />;
   }
-  
+
   return children;
 };
 
@@ -61,6 +62,11 @@ function AppRoutes() {
       <Route path="/new-list" element={
         <ProtectedRoute>
           <NewList />
+        </ProtectedRoute>
+      } />
+      <Route path="/edit-list/:id" element={  // <-- ADD THIS ROUTE
+        <ProtectedRoute>
+          <EditList />
         </ProtectedRoute>
       } />
       <Route path="/list/:id" element={

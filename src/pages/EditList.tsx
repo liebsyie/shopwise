@@ -51,16 +51,15 @@ const EditList = () => {
 
   const handleSubmit = (values: { name: string; budget: number | string; description: string }) => {
     if (!id) return;
+    const existing = lists.find((l) => l.id === id);
+    if (!existing) return;
+
     const updatedList = {
-      id,
+      ...existing,
       name: values.name,
       budget: typeof values.budget === 'string' ? parseFloat(values.budget) : values.budget,
       description: values.description,
-      // We'll keep the rest of the list's properties intact:
-      ...lists.find((l) => l.id === id),
-      name: values.name,
-      budget: typeof values.budget === 'string' ? parseFloat(values.budget) : values.budget,
-      description: values.description,
+      createdAt: existing.createdAt || new Date().toISOString(),
     };
     updateList(updatedList);
     navigate('/dashboard');

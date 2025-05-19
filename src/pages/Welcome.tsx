@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, ChartLine, Check, ChevronRight, DollarSign, ShoppingCart, Sparkles } from 'lucide-react';
+import { ArrowRight, ChartLine, Check, ChevronRight, ShoppingCart, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export const Welcome: React.FC = () => {
@@ -90,7 +90,8 @@ export const Welcome: React.FC = () => {
             </div>
             <div className="glass-card p-4 hover:shadow-md hover:translate-y-[-2px] transition-all duration-300">
               <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center mb-2">
-                <DollarSign className="text-emerald-600" size={16} />
+                <span className="text-green-500 text-[24px]">₱</span>
+
               </div>
               <h4 className="font-medium" style={{ fontFamily: "'Outfit', sans-serif" }}>Budget Tracker</h4>
               <p className="text-sm text-gray-600">Real-time spending updates</p>
@@ -140,7 +141,8 @@ export const Welcome: React.FC = () => {
             
             <div className="glass-card p-8 hover:shadow-lg hover:translate-y-[-4px] transition-all duration-300 border border-white/40">
               <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl shadow-lg flex items-center justify-center mb-6 -mt-10 -ml-2">
-                <DollarSign className="text-white" size={24} />
+                <span className="text-white text-[24px]">₱</span>
+
               </div>
               <h3 className="text-xl font-semibold mb-3" style={{ fontFamily: "'Outfit', sans-serif" }}>Budget Management</h3>
               <p className="text-gray-600 leading-relaxed">Set budgets for each shopping list and track your spending in real-time with visual indicators of your budget status.</p>

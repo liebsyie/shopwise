@@ -22,9 +22,11 @@ const Login = () => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100" style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}>
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100" style={{ fontFamily: "'Inter', sans-serif" }}>
       <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-200/50 via-slate-100/30 to-blue-100/40"></div>
       <div className="fixed inset-0 -z-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15]"></div>
+      
+      {/* Consistent Header */}
       <header className="py-6 px-8 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2">
@@ -43,28 +45,29 @@ const Login = () => {
           </Link>
         </div>
       </header>
+
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8">
             <div className="flex justify-center">
               <ShoppingCart className="text-blue-600" size={40} />
             </div>
-            <h1 className="mt-4 text-3xl font-extrabold text-gray-800" style={{ fontFamily: "'Montserrat', 'Poppins', sans-serif" }}>
-              Sign in to <span className="font-black">ShopWise</span>
+            <h1 className="mt-4 text-3xl font-bold text-gray-800" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+              Sign in to ShopWise
             </h1>
-            <p className="mt-2 text-gray-700 font-medium" style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}>
+            <p className="mt-2 text-gray-600">
               Track your grocery budget and never overspend again
             </p>
           </div>
           <LoginForm />
-          <div className="mt-6 flex flex-col sm:flex-row justify-between items-center text-gray-700 gap-2 font-medium" style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}>
-            <span>
-              Don't have an account?{' '}
-              <Link to="/register" className="text-blue-600 hover:underline font-bold">
-                Sign up
-              </Link>
-            </span>
-            <Link to="/forgot-password" className="text-blue-600 hover:underline font-bold">
+          <div className="mt-6 text-center text-gray-600">
+            Don't have an account?{' '}
+            <Link to="/register" className="text-blue-600 hover:underline font-medium">
+              Sign up
+            </Link>
+          </div>
+          <div className="mt-4 text-center">
+            <Link to="/forgot-password" className="text-blue-600 hover:underline font-medium">
               Forgot Password?
             </Link>
           </div>

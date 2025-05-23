@@ -13,6 +13,7 @@ import NewList from './pages/NewList';
 import EditList from './pages/EditList'; // NEW - import your edit page
 import ListDetail from './pages/ListDetail';
 import Profile from './pages/Profile';
+import ForgotPassword from './pages/ForgotPassword';
 import './index.css';
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
@@ -52,6 +53,11 @@ function AppRoutes() {
       <Route path="/register" element={
         <PublicRoute>
           <Register />
+        </PublicRoute>
+      } />
+      <Route path="/forgot-password" element={
+        <PublicRoute>
+          <ForgotPassword />
         </PublicRoute>
       } />
       <Route path="/dashboard" element={

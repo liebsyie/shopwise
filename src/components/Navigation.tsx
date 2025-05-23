@@ -47,26 +47,21 @@ export const Navigation = () => {
   };
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
-      scrolled 
-        ? 'bg-white/80 shadow-md backdrop-blur-md border-b border-white/20' 
-        : 'bg-white/70 backdrop-blur-sm border-b border-gray-200/70'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
+    <nav className={`sticky top-0 z-50 transition-all duration-300 bg-white/80 shadow-md backdrop-blur-md border-b border-white/20`}> 
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="flex justify-between items-center h-20">
+          <div className="flex items-center gap-2">
             <Link to="/" className="flex items-center gap-2">
-              <div className="p-2 bg-gradient-to-br from-indigo-600 to-violet-600 rounded-lg shadow-md">
-                <ShoppingCart className="text-white" size={20} />
+              <div className="p-2 bg-gradient-to-br from-indigo-600 to-violet-600 rounded-lg shadow-lg">
+                <ShoppingCart className="text-white" size={24} />
               </div>
-              <span className="font-bold text-xl gradient-text" style={{ fontFamily: "'Outfit', sans-serif" }}>
+              <span className="font-bold text-2xl gradient-text" style={{ fontFamily: "'Outfit', sans-serif" }}>
                 ShopWise
               </span>
             </Link>
           </div>
-
           {/* Desktop navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center gap-4">
             {currentUser ? (
               <>
                 {/* Dashboard */}
@@ -129,7 +124,12 @@ export const Navigation = () => {
               <>
                 <Link 
                   to="/login" 
-                  className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 transition-all duration-200"
+                  className="py-2 px-4 rounded-lg text-indigo-600 font-medium hover:bg-white hover:shadow-sm transition duration-300"
+                >
+                  Login
+                </Link>
+                <Link 
+                  to="/register" 
                 >
                   Login
                 </Link>

@@ -47,9 +47,15 @@ export const Navigation = () => {
   };
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 bg-white/80 shadow-md backdrop-blur-md border-b border-white/20`}> 
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="flex justify-between items-center h-20">
+    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
+      scrolled 
+        ? 'bg-white/80 shadow-md backdrop-blur-md border-b border-white/20' 
+        : 'bg-white/70 backdrop-blur-sm border-b border-gray-200/70'
+    }`}>
+      {/* Updated container with same padding as Welcome page */}
+      <div className="max-w-7xl mx-auto px-8 py-6">
+        <div className="flex justify-between items-center">
+          {/* Updated logo to match Welcome page sizing */}
           <div className="flex items-center gap-2">
             <Link to="/" className="flex items-center gap-2">
               <div className="p-2 bg-gradient-to-br from-indigo-600 to-violet-600 rounded-lg shadow-lg">
@@ -60,6 +66,7 @@ export const Navigation = () => {
               </span>
             </Link>
           </div>
+
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center gap-4">
             {currentUser ? (
@@ -122,6 +129,7 @@ export const Navigation = () => {
               </>
             ) : (
               <>
+                {/* Updated login/signup buttons to match Welcome page */}
                 <Link 
                   to="/login" 
                   className="py-2 px-4 rounded-lg text-indigo-600 font-medium hover:bg-white hover:shadow-sm transition duration-300"
@@ -130,14 +138,9 @@ export const Navigation = () => {
                 </Link>
                 <Link 
                   to="/register" 
+                  className="py-2 px-5 bg-gradient-to-r from-indigo-600 to-violet-600 text-white rounded-lg font-medium hover:shadow-md hover:translate-y-[-2px] active:translate-y-[0px] transition duration-300 flex items-center gap-1"
                 >
-                  Login
-                </Link>
-                <Link 
-                  to="/register" 
-                  className="px-3 py-2 rounded-md text-sm font-medium bg-gradient-to-r from-indigo-600 to-violet-600 text-white hover:shadow-md hover:translate-y-[-1px] active:translate-y-[0px] transition duration-200"
-                >
-                  Sign Up
+                  <span>Sign Up</span>
                 </Link>
               </>
             )}
@@ -155,7 +158,7 @@ export const Navigation = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu (unchanged) */}
       {isMenuOpen && (
         <div className="md:hidden">
           <div className="pt-2 pb-4 space-y-1 px-4">
@@ -224,7 +227,7 @@ export const Navigation = () => {
                 </Link>
                 <Link
                   to="/register"
-                  className="block px-3 py-2 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700"
+                  className="block px-3 py-2 rounded-md text-base font-medium bg-gradient-to-r from-indigo-600 to-violet-600 text-white hover:bg-indigo-700"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Sign Up

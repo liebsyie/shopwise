@@ -10,7 +10,7 @@ const Register = () => {
   
   useEffect(() => {
     const link = document.createElement('link');
-    link.href = 'https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap';
+    link.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap';
     link.rel = 'stylesheet';
     document.head.appendChild(link);
     if (isAuthenticated) {
@@ -25,13 +25,16 @@ const Register = () => {
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100" style={{ fontFamily: "'Inter', sans-serif" }}>
       <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-200/50 via-slate-100/30 to-blue-100/40"></div>
       <div className="fixed inset-0 -z-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15]"></div>
-      {/* Header from Welcome page */}
+      
+      {/* Consistent Header */}
       <header className="py-6 px-8 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <div className="p-2 bg-gradient-to-br from-indigo-600 to-violet-600 rounded-lg shadow-lg">
-            <ShoppingCart className="text-white" size={24} />
-          </div>
-          <span className="font-bold text-2xl gradient-text" style={{ fontFamily: "'Outfit', sans-serif" }}>ShopWise</span>
+          <Link to="/" className="flex items-center gap-2">
+            <div className="p-2 bg-gradient-to-br from-indigo-600 to-violet-600 rounded-lg shadow-lg">
+              <ShoppingCart className="text-white" size={24} />
+            </div>
+            <span className="font-bold text-2xl gradient-text" style={{ fontFamily: "'Outfit', sans-serif" }}>ShopWise</span>
+          </Link>
         </div>
         <div className="flex gap-4">
           <Link to="/login" className="py-2 px-4 rounded-lg text-indigo-600 font-medium hover:bg-white hover:shadow-sm transition duration-300">
@@ -43,7 +46,7 @@ const Register = () => {
           </Link>
         </div>
       </header>
-      {/* End Header */}
+
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8">

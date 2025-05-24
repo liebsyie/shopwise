@@ -22,6 +22,16 @@ export const useAuth = () => {
   return context;
 };
 
+// Utility function to hash a string using SHA-256 and return hex
+async function hashPassword(password: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password);
+  const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hashBuffer))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
 const AuthStateManager: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -54,7 +64,8 @@ const AuthStateManager: React.FC<{ children: React.ReactNode }> = ({ children })
 
   const login = async (email: string, password: string) => {
     const users: User[] = JSON.parse(localStorage.getItem('shopwise_users') || '[]');
-    const user = users.find(u => u.email === email && u.password === password);
+    const hashedPassword = await hashPassword(password);
+    const user = users.find(u => u.email === email && u.password === hashedPassword);
 
     if (!user) throw new Error('Invalid email or password');
     
@@ -71,11 +82,12 @@ const AuthStateManager: React.FC<{ children: React.ReactNode }> = ({ children })
       throw new Error('Email already registered');
     }
 
+    const hashedPassword = await hashPassword(password);
     const user: User = {
       id: Date.now().toString(),
       name,
       email,
-      password,
+      password: hashedPassword,
       photoURL: ''
     };
 
@@ -95,13 +107,20 @@ const AuthStateManager: React.FC<{ children: React.ReactNode }> = ({ children })
   };
 
   const updateProfile = async (updates: { name?: string; photoURL?: string }) => {
-    if (!currentUser) return;
+    if (!currentUser) throw new Error('No user logged in');
 
     const users: User[] = JSON.parse(localStorage.getItem('shopwise_users') || '[]');
+    let newPhotoURL = updates.photoURL;
+    // Accept both data URLs and valid image URLs
+    if (newPhotoURL && !newPhotoURL.startsWith('data:') && !/^https?:\/\//.test(newPhotoURL)) {
+      // If not a data URL or http(s) URL, try to resolve as a relative path
+      newPhotoURL = window.location.origin + '/' + newPhotoURL.replace(/^\/*/, '');
+    }
+
     const updatedUser = {
       ...currentUser,
-      name: updates.name || currentUser.name,
-      photoURL: updates.photoURL || currentUser.photoURL
+      name: updates.name !== undefined ? updates.name : currentUser.name,
+      photoURL: newPhotoURL !== undefined ? newPhotoURL : currentUser.photoURL
     };
 
     const updatedUsers = users.map(u => 

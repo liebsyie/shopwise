@@ -20,25 +20,25 @@ export const Welcome: React.FC = () => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div className="min-h-screen" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div className="flex flex-col min-h-screen">
       {/* Background elements */}
       <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-200 via-slate-100 to-indigo-100 opacity-90"></div>
       <div className="fixed inset-0 -z-10 bg-gradient-to-b from-indigo-50/50 to-blue-50/50"></div>
       <div className="fixed inset-0 -z-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
       
       {/* Header */}
-      <header className="py-6 px-8 flex justify-between items-center">
+      <header className="py-4 px-4 flex flex-row items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="p-2 bg-gradient-to-br from-indigo-600 to-violet-600 rounded-lg shadow-lg">
             <ShoppingCart className="text-white" size={24} />
           </div>
           <span className="font-bold text-2xl gradient-text" style={{ fontFamily: "'Outfit', sans-serif" }}>ShopWise</span>
         </div>
-        <div className="flex gap-4">
-          <Link to="/login" className="py-2 px-4 rounded-lg text-indigo-600 font-medium hover:bg-white hover:shadow-sm transition duration-300">
+        <div className="flex gap-2">
+          <Link to="/login" className="py-2 px-4 rounded-lg text-indigo-600 font-medium hover:bg-white hover:shadow-sm transition duration-300 text-center">
             Login
           </Link>
-          <Link to="/register" className="py-2 px-5 bg-gradient-primary text-white rounded-lg font-medium hover:shadow-md hover:translate-y-[-2px] active:translate-y-[0px] transition duration-300 flex items-center gap-1">
+          <Link to="/register" className="py-2 px-5 bg-gradient-primary text-white rounded-lg font-medium hover:shadow-md hover:translate-y-[-2px] active:translate-y-[0px] transition duration-300 flex items-center gap-1 justify-center">
             <span>Get Started</span>
             <ChevronRight size={16} />
           </Link>
@@ -179,7 +179,7 @@ export const Welcome: React.FC = () => {
       </section>
       
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 px-8">
+      <footer className="bg-gray-900 text-white py-8 px-8 mt-auto w-full">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center gap-2 mb-4 md:mb-0">

@@ -72,10 +72,11 @@ export const ListProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [currentList]);
 
   const createList = (name: string, budget: number) => {
+    const safeBudget = Math.max(0, budget);
     const newList: ShoppingList = {
       id: Date.now().toString(),
       name,
-      budget,
+      budget: safeBudget,
       createdAt: new Date().toISOString(),
       items: [],
     };

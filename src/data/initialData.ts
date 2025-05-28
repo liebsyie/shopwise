@@ -9,5 +9,4 @@ export const defaultCategories: Category[] = [
   { id: '6', name: 'Canned Goods', isDefault: true },
   { id: '7', name: 'Beverages', isDefault: true },
   { id: '8', name: 'Snacks', isDefault: true },
-  { id: '9', name: 'Other', isDefault: true },
 ];

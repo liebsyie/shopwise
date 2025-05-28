@@ -14,6 +14,13 @@ import EditList from './pages/EditList'; // NEW - import your edit page
 import ListDetail from './pages/ListDetail';
 import Profile from './pages/Profile';
 import ForgotPassword from './pages/ForgotPassword';
+import PrivacyPolicy from './pages/footer/PrivacyPolicy';
+import Terms from './pages/footer/Terms';
+import Modal from './components/Modal';
+import Contact from './pages/footer/Contact';
+import About from './pages/footer/About';
+import FAQ from './pages/footer/FAQ';
+import Feedback from './pages/footer/Feedback';
 import './index.css';
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
@@ -38,55 +45,78 @@ const PublicRoute = ({ children }: { children: JSX.Element }) => {
 };
 
 function AppRoutes() {
+  const location = useLocation();
+  // @ts-ignore
+  const state = location.state as { background?: Location };
+
   return (
-    <Routes>
-      <Route path="/" element={
-        <PublicRoute>
-          <Welcome />
-        </PublicRoute>
-      } />
-      <Route path="/login" element={
-        <PublicRoute>
-          <Login />
-        </PublicRoute>
-      } />
-      <Route path="/register" element={
-        <PublicRoute>
-          <Register />
-        </PublicRoute>
-      } />
-      <Route path="/forgot-password" element={
-        <PublicRoute>
-          <ForgotPassword />
-        </PublicRoute>
-      } />
-      <Route path="/dashboard" element={
-        <ProtectedRoute>
-          <Dashboard />
-        </ProtectedRoute>
-      } />
-      <Route path="/new-list" element={
-        <ProtectedRoute>
-          <NewList />
-        </ProtectedRoute>
-      } />
-      <Route path="/edit-list/:id" element={  // <-- ADD THIS ROUTE
-        <ProtectedRoute>
-          <EditList />
-        </ProtectedRoute>
-      } />
-      <Route path="/list/:id" element={
-        <ProtectedRoute>
-          <ListDetail />
-        </ProtectedRoute>
-      } />
-      <Route path="/profile" element={
-        <ProtectedRoute>
-          <Profile />
-        </ProtectedRoute>
-      } />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <>
+      <Routes location={state?.background || location}>
+        <Route path="/about" element={<About />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/" element={
+          <PublicRoute>
+            <Welcome />
+          </PublicRoute>
+        } />
+        <Route path="/login" element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        } />
+        <Route path="/register" element={
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        } />
+        <Route path="/forgot-password" element={
+          <PublicRoute>
+            <ForgotPassword />
+          </PublicRoute>
+        } />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/new-list" element={
+          <ProtectedRoute>
+            <NewList />
+          </ProtectedRoute>
+        } />
+        <Route path="/edit-list/:id" element={
+          <ProtectedRoute>
+            <EditList />
+          </ProtectedRoute>
+        } />
+        <Route path="/list/:id" element={
+          <ProtectedRoute>
+            <ListDetail />
+          </ProtectedRoute>
+        } />
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        } />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+      {/* Modal routes for footer pages */}
+      {state?.background && (
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      )}
+    </>
   );
 }
 

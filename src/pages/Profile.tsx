@@ -107,23 +107,25 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen font-[Outfit,sans-serif] bg-gradient-to-br from-indigo-100 via-blue-50 to-violet-100">
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-200/60 via-slate-100/40 to-blue-100/50"></div>
+      <div className="fixed inset-0 -z-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.13]"></div>
       <Navigation />
       <div className="flex-1">
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center mb-6">
             <button 
               onClick={() => navigate(-1)} 
-              className="p-2 rounded-full hover:bg-gray-100 mr-2 transition"
+              className="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition font-semibold p-0 mr-2 bg-transparent border-none shadow-none"
+              style={{ boxShadow: 'none', background: 'none' }}
             >
-              <ArrowLeft size={20} className="text-gray-600" />
+              <ArrowLeft size={18} />
             </button>
-            <h1 className="text-2xl font-bold text-gray-800" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+            <h1 className="text-2xl font-bold text-indigo-600 hover:text-indigo-800 transition font-semibold" style={{ fontFamily: "'Outfit', 'Montserrat', sans-serif" }}>
               My Profile
             </h1>
           </div>
-          
-          <div className="bg-white/90 backdrop-blur-md rounded-xl shadow-md p-6 border border-white/50 max-w-2xl mx-auto relative">
+          <div className="bg-white/60 backdrop-blur-2xl rounded-2xl shadow-xl p-8 border border-white/40 ring-1 ring-indigo-100 max-w-2xl mx-auto relative animate-fade-in">
             {/* Success/Cancel Message */}
             {showDeleteMessage && message && (
               <div className={`fixed top-8 left-1/2 z-50 -translate-x-1/2 px-6 py-3 rounded-xl shadow-lg text-base font-semibold transition-all duration-300 animate-fade-in ${messageType === 'success' ? 'bg-green-500 text-white' : 'bg-blue-600 text-white'}`}>
@@ -158,14 +160,12 @@ const Profile = () => {
               <h2 className="text-xl font-semibold text-gray-800 mb-2">{nickname || 'No name set'}</h2>
               <button 
                 onClick={() => setIsEditing(!isEditing)} 
-                className="text-indigo-600 hover:underline mb-4"
+                className="text-indigo-600 hover:underline mb-4 font-semibold transition-colors"
               >
                 {isEditing ? 'Cancel' : 'Edit Profile'}
               </button>
               {message && (
-                <div className={`mb-4 p-3 rounded-lg text-sm ${messageType === 'success' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
-                  {message}
-                </div>
+                <div className={`mb-4 p-3 rounded-lg text-sm ${messageType === 'success' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>{message}</div>
               )}
               {isEditing && (
                 <form onSubmit={handleSave} className="w-full">
@@ -178,27 +178,64 @@ const Profile = () => {
                       id="nickname"
                       value={nickname}
                       onChange={(e) => setNickname(e.target.value)}
-                      className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                      className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent bg-white/80 shadow-sm hover:shadow-md"
                       placeholder="Enter your nickname"
                       required
                     />
                   </div>
                   <button 
                     type="submit"
-                    className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition"
+                    className="w-full bg-gradient-to-r from-indigo-500 via-violet-500 to-blue-500 text-white py-3 rounded-xl shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-200 font-semibold border-2 border-transparent hover:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                   >
                     Save Changes
                   </button>
                 </form>
               )}
             </div>
-            
+            {/* Account Info Section */}
+            <div className="bg-indigo-50/60 rounded-xl p-4 mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <div className="text-gray-700 text-sm font-medium">Account Created</div>
+                <div className="text-lg font-semibold text-indigo-700">
+                  {currentUser?.createdAt ? new Date(currentUser.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : 'N/A'}
+                </div>
+              </div>
+              <div>
+                <div className="text-gray-700 text-sm font-medium">Last Login</div>
+                <div className="text-lg font-semibold text-indigo-700">
+                  {currentUser?.lastLogin ? new Date(currentUser.lastLogin).toLocaleString(undefined, { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'N/A'}
+                </div>
+              </div>
+            </div>
+            {/* Download Data Button */}
+            <div className="mb-6">
+              <button
+                onClick={() => {
+                  // Download user data as JSON (excluding password for privacy)
+                  const { password, ...safeUser } = currentUser || {};
+                  const data = JSON.stringify(safeUser, null, 2);
+                  const blob = new Blob([data], { type: 'application/json' });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = 'shopwise-profile-data.json';
+                  a.click();
+                  URL.revokeObjectURL(url);
+                }}
+                className="w-full bg-gradient-to-r from-indigo-500 via-violet-500 to-blue-500 text-white py-3 rounded-xl shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-200 font-semibold border-2 border-transparent hover:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 flex items-center justify-center gap-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m0 0l-4-4m4 4l4-4" />
+                </svg>
+                Download My Data
+              </button>
+            </div>
             <div className="border-t border-gray-200 pt-4">
               <h3 className="text-lg font-semibold text-gray-800 mb-3">Account Settings</h3>
               <div className="relative">
                 <button
                   onClick={handleDeleteAccount}
-                  className="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition flex items-center justify-center"
+                  className="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition flex items-center justify-center font-semibold"
                 >
                   <Trash2 size={18} className="mr-2" />
                   Delete Account
@@ -243,5 +280,5 @@ export default Profile;
 .animate-fade-in { animation: fadeIn 0.3s; }
 .animate-fade-in-up { animation: fadeInUp 0.3s; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1, transform: translateY(0); } }
 */

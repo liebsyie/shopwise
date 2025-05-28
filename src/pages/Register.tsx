@@ -26,18 +26,18 @@ const Register = () => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-200/50 via-slate-100/30 to-blue-100/40"></div>
-      <div className="fixed inset-0 -z-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15]"></div>
+    <div className="flex flex-col min-h-screen font-[Outfit,sans-serif] bg-gradient-to-br from-indigo-100 via-blue-50 to-violet-100">
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-200/60 via-slate-100/40 to-blue-100/50"></div>
+      <div className="fixed inset-0 -z-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.13]"></div>
       <Navigation />
-      <div className="flex-1">
+      <div className="flex-1 flex items-center justify-center">
         <div className="container mx-auto px-4 py-12">
-          <div className="max-w-md mx-auto">
+          <div className="max-w-md mx-auto bg-white/60 backdrop-blur-2xl rounded-2xl shadow-xl border border-white/40 ring-1 ring-indigo-100 p-8 animate-fade-in">
             <div className="text-center mb-8">
               <div className="flex justify-center">
-                <ShoppingCart className="text-blue-600" size={40} />
+                <ShoppingCart className="text-indigo-500 drop-shadow-lg" size={44} />
               </div>
-              <h1 className="mt-4 text-3xl font-bold text-gray-800" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+              <h1 className="mt-4 text-3xl font-extrabold text-gray-800 tracking-tight drop-shadow-sm" style={{ fontFamily: "'Outfit', 'Montserrat', sans-serif" }}>
                 Create your account
               </h1>
               <p className="mt-2 text-gray-600">
@@ -49,7 +49,7 @@ const Register = () => {
             
             <div className="mt-6 text-center text-gray-600">
               Already have an account?{' '}
-              <Link to="/login" className="text-blue-600 hover:underline font-medium">
+              <Link to="/login" className="text-indigo-600 hover:underline font-semibold transition-colors">
                 Sign in
               </Link>
             </div>

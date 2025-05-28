@@ -4,6 +4,8 @@ export interface User {
   email: string;
   password: string; // Add this line
   photoURL?: string;
+  createdAt?: string;
+  lastLogin?: string;
 }
 
 // Keep other existing interfaces

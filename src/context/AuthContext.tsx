@@ -68,7 +68,11 @@ const AuthStateManager: React.FC<{ children: React.ReactNode }> = ({ children })
     const user = users.find(u => u.email === email && u.password === hashedPassword);
 
     if (!user) throw new Error('Invalid email or password');
-    
+    // Update lastLogin on login
+    user.lastLogin = new Date().toISOString();
+    // Update users array in localStorage
+    const updatedUsers = users.map(u => u.id === user.id ? { ...u, lastLogin: user.lastLogin } : u);
+    localStorage.setItem('shopwise_users', JSON.stringify(updatedUsers));
     localStorage.setItem('shopwise_user', JSON.stringify(user));
     setCurrentUser(user);
     setIsAuthenticated(true);
@@ -88,7 +92,9 @@ const AuthStateManager: React.FC<{ children: React.ReactNode }> = ({ children })
       name,
       email,
       password: hashedPassword,
-      photoURL: ''
+      photoURL: '',
+      createdAt: new Date().toISOString(),
+      lastLogin: new Date().toISOString(),
     };
 
     localStorage.setItem('shopwise_users', JSON.stringify([...users, user]));

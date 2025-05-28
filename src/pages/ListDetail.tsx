@@ -107,25 +107,26 @@ const ListDetail = () => {
   );
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen font-[Outfit,sans-serif] bg-gradient-to-br from-indigo-100 via-blue-50 to-violet-100">
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-200/60 via-slate-100/40 to-blue-100/50"></div>
+      <div className="fixed inset-0 -z-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.13]"></div>
       <Navigation />
       <div className="flex-1">
         <div className="container mx-auto px-4 py-8">
           <div className="mb-6">
             <Link 
               to="/dashboard" 
-              className="inline-flex items-center text-blue-600 hover:text-blue-700 transition"
+              className="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition font-semibold"
             >
               <ChevronLeft size={18} />
               <span>Back to Dashboard</span>
             </Link>
           </div>
-          
           <div className="flex flex-col md:flex-row justify-between items-start gap-6">
             <div className="w-full md:w-8/12">
-              <div className="bg-white/90 backdrop-blur-md rounded-xl shadow-md p-6 mb-6 border border-white/50">
+              <div className="bg-white/60 backdrop-blur-2xl rounded-2xl shadow-xl p-8 mb-6 border border-white/40 ring-1 ring-indigo-100 animate-fade-in">
                 <div className="flex justify-between items-center mb-4">
-                  <h1 className="text-2xl font-bold text-gray-800" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                  <h1 className="text-2xl font-extrabold text-gray-800 tracking-tight drop-shadow-sm" style={{ fontFamily: "'Outfit', 'Montserrat', sans-serif" }}>
                     {currentList.name}
                   </h1>
                   <div className="flex gap-2">
@@ -146,27 +147,20 @@ const ListDetail = () => {
                     </button>
                   </div>
                 </div>
-                
                 <div className="mb-6">
                   <div className="flex justify-between mb-2">
                     <span className="text-gray-600">Budget: ₱{currentList.budget.toFixed(2)}</span>
-                    <span className={`font-medium ${remaining < 0 ? 'text-red-600' : 'text-green-600'}`}>
-                      ₱{remaining.toFixed(2)} remaining
-                    </span>
+                    <span className={`font-medium ${remaining < 0 ? 'text-red-600' : 'text-green-600'}`}>₱{remaining.toFixed(2)} remaining</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2.5 mb-1">
                     <div 
-                      className={`h-2.5 rounded-full ${budgetStatus.color}`}
+                      className={`h-2.5 rounded-full transition-all duration-300 ${budgetStatus.color}`}
                       style={{ width: `${Math.min(percentSpent, 100)}%` }}
                     ></div>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-500">
-                      ₱{totalSpent.toFixed(2)} spent
-                    </span>
-                    <span className={`${budgetStatus.text} font-medium`}>
-                      {budgetStatus.message}
-                    </span>
+                    <span className="text-gray-500">₱{totalSpent.toFixed(2)} spent</span>
+                    <span className={`${budgetStatus.text} font-medium`}>{budgetStatus.message}</span>
                   </div>
                 </div>
                 
@@ -299,7 +293,7 @@ const ListDetail = () => {
             
             <div className="w-full md:w-4/12 sticky top-4">
               {(showAddItemForm || editingItem) && (
-                <div className="bg-white rounded-xl shadow-md p-6 mb-6">
+                <div className="bg-white/60 backdrop-blur-2xl rounded-2xl shadow-xl p-8 mb-6 border border-white/40 ring-1 ring-indigo-100 animate-fade-in">
                   <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg font-semibold text-gray-800">
                       {editingItem ? 'Edit Item' : 'Add Item'}
@@ -314,7 +308,6 @@ const ListDetail = () => {
                       &times;
                     </button>
                   </div>
-                  
                   <AddItemForm 
                     onCancel={() => {
                       setShowAddItemForm(false);
@@ -333,9 +326,8 @@ const ListDetail = () => {
                   />
                 </div>
               )}
-              
               {!showAddItemForm && !editingItem && (
-                <div className="bg-white rounded-xl shadow-md p-6">
+                <div className="bg-white/60 backdrop-blur-2xl rounded-2xl shadow-xl p-8 border border-white/40 ring-1 ring-indigo-100 animate-fade-in">
                   <h2 className="text-lg font-semibold text-gray-800 mb-4">Shopping Summary</h2>
                   
                   <div className="mb-6">

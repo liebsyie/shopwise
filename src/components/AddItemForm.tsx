@@ -216,7 +216,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ onCancel, initialItem, onSave
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition text-sm appearance-none bg-white"
                 >
                   <option value="">Select a category</option>
-                  {categories.map((category) => (
+                  {categories.filter(category => category.name !== 'Other').map((category) => (
                     <option key={category.id} value={category.name}>
                       {category.name}
                     </option>
